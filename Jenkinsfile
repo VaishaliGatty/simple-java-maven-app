@@ -8,7 +8,7 @@ pipeline{
     {
         steps{
             echo 'Building the project...'
-            sh 'mvn clean package'
+            bat 'mvn clean package'
         }
         post{
             success{
