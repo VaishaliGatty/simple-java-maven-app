@@ -1,4 +1,4 @@
-pipeline{
+archiveArtifacts artifacts: '**/*.jar'pipeline{
     agent any
      tools {
         maven 'local_maven'
@@ -13,13 +13,13 @@ pipeline{
         post{
             success{
                 echo 'archieve artifacts'
-                archiveArtifacts artifacts:'**/target/*.war'
+               archiveArtifacts artifacts: '**/*.jar'
             }
         }
     }
     stage('Deploy to Tomcat'){
       steps{
-        deploy adapters: [tomcat9(path: '', url: 'http://localhost:8080/')], contextPath: null, war: '**/*.war'
+        deploy adapters: [tomcat9(path: '', url: 'http://localhost:8080/')], contextPath: null, jar: '**/*.jar'
       }
     }
 }
