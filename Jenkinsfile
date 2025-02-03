@@ -1,4 +1,4 @@
-archiveArtifacts artifacts: '**/*.jar'pipeline{
+pipeline{
     agent any
      tools {
         maven 'local_maven'
