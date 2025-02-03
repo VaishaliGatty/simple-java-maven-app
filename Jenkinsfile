@@ -13,13 +13,13 @@ archiveArtifacts artifacts: '**/*.jar'pipeline{
         post{
             success{
                 echo 'archieve artifacts'
-               archiveArtifacts artifacts: '**/*.jar'
+               archiveArtifacts artifacts: '**/*.war'
             }
         }
     }
     stage('Deploy to Tomcat'){
       steps{
-        deploy adapters: [tomcat9(path: '', url: 'http://localhost:8080/')], contextPath: null, jar: '**/*.jar'
+        deploy adapters: [tomcat9(path: '', url: 'http://localhost:8080/')], contextPath: null, war: '**/*.war'
       }
     }
 }
