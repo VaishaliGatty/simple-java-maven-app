@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Using Jenkins credentials securely
-                    withCredentials([usernamePassword(credentialsId: 'Tomcat-cred', 
+                   /* withCredentials([usernamePassword(credentialsId: 'Tomcat-cred', 
                         usernameVariable: 'TOMCAT_USER', 
                         passwordVariable: 'TOMCAT_PASS')]) {
                         echo 'Deploying WAR to Tomcat...'
@@ -34,7 +34,8 @@ pipeline {
                             password: TOMCAT_PASS,
                             path: ''
                         )], war: '**/*.war', contextPath: '/'
-                    }
+                    }*/
+                deploy contextPath: 'simple-java-maven-app', war: 'target/*.war'
                 }
             }
         }
