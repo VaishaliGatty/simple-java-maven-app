@@ -19,27 +19,23 @@ pipeline {
             }
         }
 
-        stage('Deploy to Tomcat') {
-            steps {
-                script {
-                    // Using Jenkins credentials securely
-                //    withCredentials([usernamePassword(credentialsId: 'Tomcat-cred', 
-                //         usernameVariable: 'TOMCAT_USER', 
-                //         passwordVariable: 'TOMCAT_PASS')]) {
-                //         echo 'Deploying WAR to Tomcat...'
-                //         deploy adapters: [tomcat9(
-                //             credentialsId: 'Tomcat-cred', 
-                //             url: 'http://localhost:8080/manager', 
-                //             username: TOMCAT_USER, 
-                //             password: TOMCAT_PASS,
-                //             path: ''
-                //         )], war: '**/*.war', contextPath: '/'
-                //     }
-                deploy contextPath: 'simple-java-maven-app', war: 'target/*.war'
-                }
+       stage('Deploy to Tomcat') {
+    steps {
+        script {
+            withCredentials([usernamePassword(credentialsId: 'Tomcat-cred', 
+                                             usernameVariable: 'TOMCAT_USER', 
+                                             passwordVariable: 'TOMCAT_PASS')]) {
+                echo 'Deploying WAR to Tomcat...'
+                deploy adapters: [tomcat9(
+                    credentialsId: 'Tomcat-cred', 
+                    url: 'http://localhost:8080/manager/text', // Correct URL
+                    path: '/',
+                    war: '**/target/*.war'
+                )]
             }
         }
     }
+}
 
     post {
         success {
