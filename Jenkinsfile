@@ -21,7 +21,7 @@ pipeline {
 
        stage('Deploy to Tomcat') {
     steps {
-        script {
+        
             withCredentials([usernamePassword(credentialsId: 'Tomcat-cred', 
                                              usernameVariable: 'TOMCAT_USER', 
                                              passwordVariable: 'TOMCAT_PASS')]) {
@@ -33,7 +33,7 @@ pipeline {
                     war: '**/target/*.war'
                 )]
             }
-        }
+        
     }
 }
 
